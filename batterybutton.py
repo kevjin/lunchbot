@@ -43,6 +43,7 @@ class netbook_battery():
 		else:
 			print("Not charging")
 			if int(data.percentage) < 50:
+				print("Going home")
 				go_to_specific_point_on_map()
 		print("-----")
 		#Tip: try print(data) for a complete list of information available in the /laptop_charge/ thread
@@ -73,12 +74,15 @@ class kobuki_button():
 		state = "pressed"  
 	    if ( data.button == ButtonEvent.Button0 ) :
 		button = "B0"
+		GoToPose()
 		#Go back to Dr. Barney Smith's office
 	    elif ( data.button == ButtonEvent.Button1 ) :
 		button = "B1"
+		go_to_specific_point_on_map()
 		#Go back to charging station.
 	    else:
 		button = "B2"
+		/* Code Put Here */
 		#Resume navigation in the event of an interrupt event, ie. closed door, obstacle, etc.
 		#Or play music/dance
 	    rospy.loginfo("Button %s was %s."%(button, state))
