@@ -20,6 +20,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 import roslib
 import rospy
+from go_to_specific_point_on_map import GoToPose #for specific locations
 from smart_battery_msgs.msg import SmartBatteryStatus #for netbook battery
 from kobuki_msgs.msg import ButtonEvent
 
@@ -44,7 +45,8 @@ class netbook_battery():
 			print("Not charging")
 			if int(data.percentage) < 50:
 				print("Going home")
-				go_to_specific_point_on_map()
+				GoToPose(x1, y1)
+			#Go back to charging station. Replace x and y arguments with first two pose coordinates seen on gmapping	
 		print("-----")
 		#Tip: try print(data) for a complete list of information available in the /laptop_charge/ thread
 
@@ -74,17 +76,17 @@ class kobuki_button():
 		state = "pressed"  
 	    if ( data.button == ButtonEvent.Button0 ) :
 		button = "B0"
-		GoToPose()
-		#Go back to Dr. Barney Smith's office
+		GoToPose(x,y)
+		#Go back to Dr. Barney Smith's office. Replace x and y arguments with first two pose coordinates seen on gmapping
 	    elif ( data.button == ButtonEvent.Button1 ) :
 		button = "B1"
-		go_to_specific_point_on_map()
-		#Go back to charging station.
+		GoToPose(x1,y1)
+		#Go back to charging station. Replace x and y arguments with first two pose coordinates seen on gmapping
 	    else:
 		button = "B2"
-		/* Code Put Here */
+		print("Never gonna give you up \nNever gonna let you down \nNever gonna run around and desert you \nNever gonna make you cry \nNever gonna say goodbye \nNever gonna tell a lie and hurt you")
 		#Resume navigation in the event of an interrupt event, ie. closed door, obstacle, etc.
-		#Or play music/dance
+		#Or play music/dance/rickroll
 	    rospy.loginfo("Button %s was %s."%(button, state))
 		
 
