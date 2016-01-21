@@ -1,1 +1,15 @@
+import cv2
+import numpy as np
 
+#camera id should be -1, 1, or 0
+cap=cv2.VideoCapture(0)
+if (False==cap.isOpened()):
+  cap.open()
+while(cap.isOpened()):
+  ret, img = cap.read()
+  cv2.imshow('display',img)
+  k=cv2.WaitKey(10)
+  if(k==27):
+    break
+cap.release()
+cv2.DestroyWindow('display')
